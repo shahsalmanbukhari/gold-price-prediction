@@ -408,5 +408,5 @@ And enjoy your dual-currency gold price prediction system! 🚀
 
 ---
 
-**Quick Start:** `cd /Users/developer/PycharmProjects/FakeTransectionDetection && streamlit run app/streamlit_app.py`
+**Quick Start:** `cd /Users/developer/PycharmProjects/GoldPricePredicton && streamlit run app/streamlit_app.py`
 

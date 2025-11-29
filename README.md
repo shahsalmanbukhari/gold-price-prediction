@@ -58,7 +58,7 @@ This project predicts next-day gold prices in **both USD and PKR** using histori
 ## 📁 Project Structure
 
 ```
-FakeTransectionDetection/
+GoldPricePredicton/
 ├── data/
 │   ├── raw/                    # Raw downloaded data
 │   │   ├── gold_prices_yahoo.csv

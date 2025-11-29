@@ -120,7 +120,7 @@
 ## 📁 File Structure Summary
 
 ```
-FakeTransectionDetection/
+GoldPricePredicton/
 ├── 📂 data/
 │   ├── raw/ (1,826 records)
 │   └── processed/ (1,795 records + metadata)
