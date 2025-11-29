@@ -1,0 +1,7 @@
+GOLD PRICE DATA - CLEANING REPORT
+============================================================
+Date: 2025-11-28 21:30:27
+Final dataset shape: (1826, 24)
+Date range: 2020-11-29 21:30:06.374644 to 2025-11-28 21:30:06.374644
+
+Cleaning steps performed:
