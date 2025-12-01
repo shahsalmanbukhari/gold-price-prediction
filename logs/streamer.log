@@ -1,0 +1,54 @@
+2025-12-01 15:26:48.882 | INFO     | realtime.finnhub_client:__init__:59 - Finnhub client initialized
+2025-12-01 15:26:48.986 | WARNING  | realtime.redis_cache:__init__:57 - ⚠ Redis connection failed: Error 61 connecting to localhost:6379. Connection refused.
+2025-12-01 15:26:48.986 | WARNING  | realtime.redis_cache:__init__:58 - Running without Redis caching
+2025-12-01 15:26:48.986 | INFO     | realtime.data_handler:__init__:47 - Data handler initialized
+2025-12-01 15:26:48.986 | INFO     | realtime.streamer:__init__:52 - Gold streamer initialized
+2025-12-01 15:26:48.987 | INFO     | realtime.streamer:run:117 - ============================================================
+2025-12-01 15:26:48.987 | INFO     | realtime.streamer:run:118 - GOLD PRICE REAL-TIME STREAMER
+2025-12-01 15:26:48.987 | INFO     | realtime.streamer:run:119 - ============================================================
+2025-12-01 15:26:48.987 | INFO     | realtime.streamer:run:120 - Started at: 2025-12-01 15:26:48.987126
+2025-12-01 15:26:48.987 | INFO     | realtime.streamer:run:121 - Redis available: False
+2025-12-01 15:26:48.988 | INFO     | realtime.streamer:run:122 - ============================================================
+2025-12-01 15:26:48.988 | INFO     | realtime.streamer:start_websocket_stream:87 - Starting WebSocket stream...
+2025-12-01 15:26:51.122 | ERROR    | realtime.finnhub_client:connect_websocket:80 - ✗ WebSocket connection failed: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+2025-12-01 15:27:22.148 | ERROR    | realtime.finnhub_client:connect_websocket:80 - ✗ WebSocket connection failed: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+2025-12-01 15:27:52.730 | ERROR    | realtime.finnhub_client:connect_websocket:80 - ✗ WebSocket connection failed: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+2025-12-01 15:28:23.623 | ERROR    | realtime.finnhub_client:connect_websocket:80 - ✗ WebSocket connection failed: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+2025-12-01 15:28:54.306 | ERROR    | realtime.finnhub_client:connect_websocket:80 - ✗ WebSocket connection failed: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+2025-12-01 15:29:14.286 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 15:29:14.286 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 15:29:14.287 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 15:29:14.288 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 15:29:14.288 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 15:29:14.288 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 15:29:14.289 | INFO     | realtime.streamer:stop:167 - Uptime: 145.30 seconds
+2025-12-01 15:29:14.289 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 15:29:14.289 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 15:29:14.290 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 15:29:14.290 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 15:29:14.290 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 15:29:21.906 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 15:29:21.906 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 15:29:21.907 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 15:29:21.907 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 15:29:21.907 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 15:29:21.907 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 15:29:21.908 | INFO     | realtime.streamer:stop:167 - Uptime: 152.92 seconds
+2025-12-01 15:29:21.908 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 15:29:21.908 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 15:29:21.908 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 15:29:21.909 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 15:29:21.909 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 15:29:24.308 | ERROR    | realtime.finnhub_client:listen_websocket:148 - Max retries (5) reached, WebSocket listener stopped
+2025-12-01 15:29:24.308 | INFO     | realtime.streamer:run:146 - Streamer stopped
+2025-12-01 15:29:24.309 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 15:29:24.309 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 15:29:24.309 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 15:29:24.310 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 15:29:24.310 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 15:29:24.310 | INFO     | realtime.streamer:stop:167 - Uptime: 155.32 seconds
+2025-12-01 15:29:24.310 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 15:29:24.310 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 15:29:24.311 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 15:29:24.311 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 15:29:24.311 | INFO     | realtime.streamer:stop:172 - ============================================================
