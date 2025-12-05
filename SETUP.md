@@ -671,6 +671,34 @@ python scripts/start_streamer.py
 python src/train.py
 ```
 
+### Issue: SSL Certificate Error (macOS)
+
+**Error:** `[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed`
+
+**Solution 1 (Quick Fix - Already Applied):**
+The code has been updated to handle SSL certificates automatically. Just restart the streamer.
+
+**Solution 2 (Permanent Fix for macOS):**
+```bash
+# Install certificates for Python
+cd /Applications/Python\ 3.*/
+./Install\ Certificates.command
+
+# Or use certifi
+pip install --upgrade certifi
+```
+
+**Solution 3 (Alternative):**
+```bash
+# Set environment variable
+export PYTHONHTTPSVERIFY=0
+
+# Then run your commands
+python scripts/start_streamer.py
+```
+
+**Note:** The WebSocket client has been updated with SSL context that handles certificate verification automatically.
+
 ---
 
 ## 📊 Quick Command Reference

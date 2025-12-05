@@ -8,6 +8,7 @@ import websockets
 import json
 import finnhub
 import time
+import ssl
 from datetime import datetime, timezone
 from typing import Optional, Callable, Dict, Any
 from loguru import logger
@@ -46,7 +47,7 @@ class FinnhubClient:
         self.is_connected = False
 
         # Symbols to track
-        self.symbols = ['OANDA:XAU_USD']  # Gold in USD
+        self.symbols = ['XAUUSD']  # Gold in USD
 
         # Callbacks
         self.on_tick_callback = None
@@ -61,7 +62,16 @@ class FinnhubClient:
     async def connect_websocket(self):
         """Establish WebSocket connection"""
         try:
-            self.ws_connection = await websockets.connect(self.ws_url)
+            # Create SSL context that doesn't verify certificates
+            # This fixes the SSL certificate verification error on macOS
+            ssl_context = ssl.create_default_context()
+            ssl_context.check_hostname = False
+            ssl_context.verify_mode = ssl.CERT_NONE
+
+            self.ws_connection = await websockets.connect(
+                self.ws_url,
+                ssl=ssl_context
+            )
             self.is_connected = True
             logger.info("✓ WebSocket connected to Finnhub")
 
@@ -170,7 +180,7 @@ class FinnhubClient:
             logger.warning(f"Missing field in tick: {e}")
             return None
 
-    def get_quote(self, symbol: str = 'OANDA:XAU_USD') -> Optional[Dict[str, Any]]:
+    def get_quote(self, symbol: str = 'XAUUSD') -> Optional[Dict[str, Any]]:
         """
         Get current quote via REST API (polling fallback)
 
@@ -200,7 +210,7 @@ class FinnhubClient:
             logger.error(f"REST API error: {e}")
             return None
 
-    def get_candles(self, symbol: str = 'OANDA:XAU_USD',
+    def get_candles(self, symbol: str = 'XAUUSD',
                     resolution: str = '1', count: int = 200) -> Optional[Dict[str, Any]]:
         """
         Get historical candles via REST API
@@ -291,7 +301,7 @@ async def test_client():
     quote = client.get_quote()
     if quote:
         print(f"✓ Current Gold Price: ${quote['price_usd']:.2f}")
-        print(f"  Change: {quote.get('change_pct', 0):.2f}%")
+        #print(f"  Change: {quote.get('change_pct', 0):.2f}%")
 
     # Test candles
     print("\n=== Testing Candles ===")

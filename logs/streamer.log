@@ -52,3 +52,275 @@
 2025-12-01 15:29:24.311 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
 2025-12-01 15:29:24.311 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
 2025-12-01 15:29:24.311 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 21:17:34.446 | INFO     | realtime.finnhub_client:__init__:60 - Finnhub client initialized
+2025-12-01 21:17:34.539 | WARNING  | realtime.redis_cache:__init__:57 - ⚠ Redis connection failed: Error 61 connecting to localhost:6379. Connection refused.
+2025-12-01 21:17:34.540 | WARNING  | realtime.redis_cache:__init__:58 - Running without Redis caching
+2025-12-01 21:17:34.540 | INFO     | realtime.data_handler:__init__:47 - Data handler initialized
+2025-12-01 21:17:34.540 | INFO     | realtime.streamer:__init__:52 - Gold streamer initialized
+2025-12-01 21:17:34.540 | INFO     | realtime.streamer:run:117 - ============================================================
+2025-12-01 21:17:34.541 | INFO     | realtime.streamer:run:118 - GOLD PRICE REAL-TIME STREAMER
+2025-12-01 21:17:34.541 | INFO     | realtime.streamer:run:119 - ============================================================
+2025-12-01 21:17:34.541 | INFO     | realtime.streamer:run:120 - Started at: 2025-12-01 21:17:34.540863
+2025-12-01 21:17:34.541 | INFO     | realtime.streamer:run:121 - Redis available: False
+2025-12-01 21:17:34.541 | INFO     | realtime.streamer:run:122 - ============================================================
+2025-12-01 21:17:34.542 | INFO     | realtime.streamer:start_websocket_stream:87 - Starting WebSocket stream...
+2025-12-01 21:17:35.606 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-01 21:17:35.608 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-01 21:18:48.478 | INFO     | realtime.finnhub_client:__init__:60 - Finnhub client initialized
+2025-12-01 21:18:48.542 | WARNING  | realtime.redis_cache:__init__:57 - ⚠ Redis connection failed: Error 61 connecting to localhost:6379. Connection refused.
+2025-12-01 21:18:48.542 | WARNING  | realtime.redis_cache:__init__:58 - Running without Redis caching
+2025-12-01 21:18:48.542 | INFO     | realtime.data_handler:__init__:47 - Data handler initialized
+2025-12-01 21:18:48.542 | INFO     | realtime.streamer:__init__:52 - Gold streamer initialized
+2025-12-01 21:18:48.543 | INFO     | realtime.streamer:run:117 - ============================================================
+2025-12-01 21:18:48.543 | INFO     | realtime.streamer:run:118 - GOLD PRICE REAL-TIME STREAMER
+2025-12-01 21:18:48.543 | INFO     | realtime.streamer:run:119 - ============================================================
+2025-12-01 21:18:48.543 | INFO     | realtime.streamer:run:120 - Started at: 2025-12-01 21:18:48.543165
+2025-12-01 21:18:48.543 | INFO     | realtime.streamer:run:121 - Redis available: False
+2025-12-01 21:18:48.544 | INFO     | realtime.streamer:run:122 - ============================================================
+2025-12-01 21:18:48.544 | INFO     | realtime.streamer:start_websocket_stream:87 - Starting WebSocket stream...
+2025-12-01 21:18:49.627 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-01 21:18:49.628 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-01 21:18:49.628 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-01 21:19:03.989 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 21:19:03.989 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 21:19:03.990 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 21:19:03.990 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 21:19:03.990 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 21:19:03.990 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 21:19:03.990 | INFO     | realtime.streamer:stop:167 - Uptime: 89.45 seconds
+2025-12-01 21:19:03.991 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 21:19:03.991 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 21:19:03.991 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 21:19:03.991 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 21:19:03.991 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 21:19:06.352 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 21:19:06.353 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 21:19:06.353 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 21:19:06.353 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 21:19:06.354 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 21:19:06.354 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 21:19:06.354 | INFO     | realtime.streamer:stop:167 - Uptime: 91.81 seconds
+2025-12-01 21:19:06.354 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 21:19:06.354 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 21:19:06.354 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 21:19:06.355 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 21:19:06.355 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 21:19:13.581 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 21:19:13.581 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 21:19:13.581 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 21:19:13.581 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 21:19:13.582 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 21:19:13.582 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 21:19:13.582 | INFO     | realtime.streamer:stop:167 - Uptime: 99.04 seconds
+2025-12-01 21:19:13.582 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 21:19:13.583 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 21:19:13.583 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 21:19:13.583 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 21:19:13.583 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 21:19:22.214 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-01 21:19:22.214 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-01 21:19:22.214 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-01 21:19:53.396 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-01 21:19:53.397 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-01 21:48:59.518 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 21:48:59.521 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 21:49:00.343 | INFO     | realtime.finnhub_client:disconnect_websocket:99 - WebSocket disconnected
+2025-12-01 21:49:00.349 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 21:49:00.349 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 21:49:00.349 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 21:49:00.350 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 21:49:00.350 | INFO     | realtime.streamer:stop:167 - Uptime: 1811.81 seconds
+2025-12-01 21:49:00.350 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 21:49:00.350 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 21:49:00.351 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 21:49:00.351 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 21:49:00.351 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 21:49:03.984 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-01 21:49:03.985 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-01 21:49:36.039 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 21:49:36.040 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 21:49:36.648 | INFO     | realtime.finnhub_client:disconnect_websocket:99 - WebSocket disconnected
+2025-12-01 21:49:36.648 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 21:49:36.649 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 21:49:36.649 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 21:49:36.649 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 21:49:36.651 | INFO     | realtime.streamer:stop:167 - Uptime: 1848.11 seconds
+2025-12-01 21:49:36.651 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 21:49:36.651 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 21:49:36.652 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 21:49:36.652 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 21:49:36.652 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 21:49:38.094 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-01 21:49:38.094 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-01 21:49:54.729 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 21:49:54.730 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 21:49:55.112 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 21:49:55.112 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 21:49:55.170 | INFO     | realtime.finnhub_client:disconnect_websocket:99 - WebSocket disconnected
+2025-12-01 21:49:55.170 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 21:49:55.170 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 21:49:55.171 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 21:49:55.171 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 21:49:55.171 | INFO     | realtime.streamer:stop:167 - Uptime: 1866.63 seconds
+2025-12-01 21:49:55.171 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 21:49:55.171 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 21:49:55.172 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 21:49:55.172 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 21:49:55.172 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 21:49:55.172 | INFO     | realtime.finnhub_client:disconnect_websocket:99 - WebSocket disconnected
+2025-12-01 21:49:55.173 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 21:49:55.173 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 21:49:55.173 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 21:49:55.173 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 21:49:55.173 | INFO     | realtime.streamer:stop:167 - Uptime: 1866.63 seconds
+2025-12-01 21:49:55.174 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 21:49:55.174 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 21:49:55.174 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 21:49:55.174 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 21:49:55.174 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 21:49:55.357 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 21:49:55.357 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 21:49:55.358 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 21:49:55.358 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 21:49:55.359 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 21:49:55.359 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 21:49:55.360 | INFO     | realtime.streamer:stop:167 - Uptime: 1866.82 seconds
+2025-12-01 21:49:55.360 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 21:49:55.360 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 21:49:55.361 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 21:49:55.361 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 21:49:55.361 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 21:49:55.572 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 21:49:55.573 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 21:49:55.573 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 21:49:55.573 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 21:49:55.573 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 21:49:55.574 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 21:49:55.574 | INFO     | realtime.streamer:stop:167 - Uptime: 1867.03 seconds
+2025-12-01 21:49:55.574 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 21:49:55.574 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 21:49:55.575 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 21:49:55.575 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 21:49:55.575 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 21:49:55.781 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 21:49:55.782 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 21:49:55.782 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 21:49:55.783 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 21:49:55.783 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 21:49:55.783 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 21:49:55.783 | INFO     | realtime.streamer:stop:167 - Uptime: 1867.24 seconds
+2025-12-01 21:49:55.784 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 21:49:55.784 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 21:49:55.784 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 21:49:55.784 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 21:49:55.785 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 21:49:55.964 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 21:49:55.965 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 21:49:55.965 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 21:49:55.965 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 21:49:55.965 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 21:49:55.966 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 21:49:55.966 | INFO     | realtime.streamer:stop:167 - Uptime: 1867.42 seconds
+2025-12-01 21:49:55.966 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 21:49:55.966 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 21:49:55.967 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 21:49:55.967 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 21:49:55.967 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 21:49:57.825 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 21:49:57.825 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 21:49:57.826 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 21:49:57.826 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 21:49:57.826 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 21:49:57.826 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 21:49:57.827 | INFO     | realtime.streamer:stop:167 - Uptime: 1869.28 seconds
+2025-12-01 21:49:57.827 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 21:49:57.827 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 21:49:57.827 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 21:49:57.828 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 21:49:57.828 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 21:49:58.196 | INFO     | realtime.streamer:signal_handler:195 - Shutdown signal received
+2025-12-01 21:49:58.197 | INFO     | realtime.streamer:stop:150 - Stopping streamer...
+2025-12-01 21:49:58.197 | INFO     | realtime.data_handler:close:210 - Data handler closed
+2025-12-01 21:49:58.197 | INFO     | realtime.streamer:stop:164 - ============================================================
+2025-12-01 21:49:58.197 | INFO     | realtime.streamer:stop:165 - STREAMER STATISTICS
+2025-12-01 21:49:58.198 | INFO     | realtime.streamer:stop:166 - ============================================================
+2025-12-01 21:49:58.198 | INFO     | realtime.streamer:stop:167 - Uptime: 1869.65 seconds
+2025-12-01 21:49:58.198 | INFO     | realtime.streamer:stop:168 - Connection mode: websocket
+2025-12-01 21:49:58.198 | INFO     | realtime.streamer:stop:169 - Ticks processed: 0
+2025-12-01 21:49:58.198 | INFO     | realtime.streamer:stop:170 - Ticks stored: 0
+2025-12-01 21:49:58.199 | INFO     | realtime.streamer:stop:171 - Success rate: 0.00%
+2025-12-01 21:49:58.199 | INFO     | realtime.streamer:stop:172 - ============================================================
+2025-12-01 21:50:03.184 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-01 21:50:03.184 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-01 23:58:56.295 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-01 23:59:26.999 | ERROR    | realtime.finnhub_client:connect_websocket:90 - ✗ WebSocket connection failed: [Errno 8] nodename nor servname provided, or not known
+2025-12-02 02:04:45.568 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-02 02:04:45.940 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-02 02:44:29.461 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-02 03:06:02.144 | ERROR    | realtime.finnhub_client:connect_websocket:90 - ✗ WebSocket connection failed: [Errno 8] nodename nor servname provided, or not known
+2025-12-02 04:07:11.741 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-02 04:07:11.746 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-02 05:08:16.942 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-02 06:09:35.428 | ERROR    | realtime.finnhub_client:connect_websocket:90 - ✗ WebSocket connection failed: 
+2025-12-02 07:10:44.953 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-02 07:10:44.961 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-02 08:12:24.113 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-02 09:13:31.720 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-02 09:13:31.726 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-02 10:57:26.541 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-02 11:03:42.420 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-02 11:03:42.428 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-02 12:52:03.226 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-02 13:18:14.128 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-02 13:18:14.133 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-02 14:20:04.215 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-02 15:58:54.969 | ERROR    | realtime.finnhub_client:connect_websocket:90 - ✗ WebSocket connection failed: [Errno 8] nodename nor servname provided, or not known
+2025-12-02 17:00:25.866 | ERROR    | realtime.finnhub_client:connect_websocket:90 - ✗ WebSocket connection failed: [Errno 8] nodename nor servname provided, or not known
+2025-12-02 17:43:02.699 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-02 17:43:02.701 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-02 19:30:37.521 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-02 19:31:10.075 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-02 19:31:10.081 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-02 19:31:52.417 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-02 19:32:24.877 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-02 19:32:24.878 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-02 23:05:56.974 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-03 00:05:57.619 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-03 00:05:57.629 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-03 01:17:50.153 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-03 01:18:20.174 | ERROR    | realtime.finnhub_client:connect_websocket:90 - ✗ WebSocket connection failed: [Errno 8] nodename nor servname provided, or not known
+2025-12-03 01:25:26.226 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-03 01:25:26.231 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-03 05:41:00.720 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-03 05:41:38.358 | ERROR    | realtime.finnhub_client:connect_websocket:90 - ✗ WebSocket connection failed: [Errno 8] nodename nor servname provided, or not known
+2025-12-03 05:42:20.443 | ERROR    | realtime.finnhub_client:connect_websocket:90 - ✗ WebSocket connection failed: 
+2025-12-03 06:57:20.819 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-03 06:57:20.824 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-03 07:44:12.303 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-03 07:58:39.810 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-03 07:58:39.812 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-03 09:00:15.083 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-03 09:00:48.000 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-03 09:00:48.003 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-03 13:38:23.095 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-03 13:38:54.592 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-03 13:38:54.596 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-03 14:05:43.061 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-03 14:06:14.580 | ERROR    | realtime.finnhub_client:connect_websocket:90 - ✗ WebSocket connection failed: [Errno 8] nodename nor servname provided, or not known
+2025-12-03 14:48:06.586 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-03 14:48:06.588 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-03 16:00:01.198 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-03 16:00:32.267 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-03 16:00:32.269 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-03 19:05:10.446 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-03 19:05:41.783 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-03 19:05:41.789 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-03 20:38:32.887 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-03 20:39:04.170 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-03 20:39:04.173 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-03 20:53:14.772 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-03 21:45:48.730 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-03 21:45:48.737 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
+2025-12-03 21:47:09.282 | WARNING  | realtime.finnhub_client:listen_websocket:146 - WebSocket connection closed, reconnecting...
+2025-12-03 21:47:40.132 | INFO     | realtime.finnhub_client:connect_websocket:76 - ✓ WebSocket connected to Finnhub
+2025-12-03 21:47:40.132 | INFO     | realtime.finnhub_client:connect_websocket:85 - ✓ Subscribed to XAUUSD
