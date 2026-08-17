@@ -1,0 +1,68 @@
+# Provider Configuration
+# Configuration for market data providers
+
+# Default provider to use
+default_provider: gold_api
+
+# Enable automatic failover to backup providers
+fallback_enabled: true
+
+# Provider priority order (first to last)
+provider_priority:
+  - gold_api
+  - metalprice
+  - finnhub
+
+# Individual provider configurations
+providers:
+  gold_api:
+    enabled: true
+    polling_interval: 60
+    cache_seconds: 35
+    timeout: 10
+    retry_count: 3
+
+  metalprice:
+    # API key loaded from environment: METALPRICE_API_KEY
+    enabled: true
+    base_currency: XAU
+    polling_interval: 60  # seconds
+    rate_limit_delay: 2.0  # seconds between requests
+    timeout: 10
+    retry_count: 3
+
+  finnhub:
+    # API key loaded from environment: FINNHUB_API_KEY
+    enabled: true
+    reconnect_delay: 30  # seconds
+    max_retries: 5
+    ping_interval: 30  # WebSocket ping interval
+    polling_interval: 10  # REST polling fallback
+    timeout: 10
+
+# Symbol mapping across providers
+symbols:
+  XAU:
+    gold_api: XAU
+    metalprice: XAU
+    finnhub: XAUUSD
+    description: "Gold (Troy Ounce)"
+
+  XAG:
+    metalprice: XAG
+    finnhub: XAGUSD
+    description: "Silver (Troy Ounce)"
+
+# Supported currencies
+currencies:
+  - USD
+  - EUR
+  - GBP
+  - PKR
+
+# Default settings
+defaults:
+  symbol: XAU
+  currency: USD
+  interval: 1d
+  history_limit: 100

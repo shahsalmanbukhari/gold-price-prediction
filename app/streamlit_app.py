@@ -18,13 +18,9 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 from predict import GoldPricePredictor
 
 
-# Page config
-st.set_page_config(
-    page_title="Gold Price Prediction | Professional Analytics",
-    page_icon="💰",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+# Page configuration is owned by app/main.py so this legacy view can render
+# inside the shared application shell without a duplicate configuration call.
+st.warning("Legacy experimental model — not used for current live predictions")
 
 # Premium Dark Theme CSS
 st.markdown("""
@@ -1018,19 +1014,7 @@ def main():
         • Low confidence when change ≥ 5%
         """, "💡")
 
-        # Disclaimer
-        st.markdown("---")
-        st.markdown("""
-        <div class="info-card" style="border-left-color: #f59e0b;">
-            ⚠️ <strong>Important Disclaimer</strong><br><br>
-            This is a predictive model for <strong>educational and research purposes</strong>. 
-            Gold prices are influenced by numerous factors including global markets, currency exchange rates, 
-            geopolitical events, and economic indicators. <br><br>
-            <strong>Always consult certified financial experts before making investment decisions.</strong>
-        </div>
-        """, unsafe_allow_html=True)
 
-
-if __name__ == "__main__":
-    main()
-
+# Streamlit's explicit page router executes page scripts with an internal module
+# name, so an __main__ guard leaves the routed page blank.
+main()

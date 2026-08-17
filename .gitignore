@@ -1,0 +1,100 @@
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+*.pem
+*.key
+
+# Python virtual environments
+.venv/
+.venv*/
+venv/
+env/
+ENV/
+
+# Python bytecode and tooling caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.hypothesis/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Python build and package output
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Runtime state and logs
+.run/
+logs/**
+!logs/.gitkeep
+*.log
+*.pid
+*.lock
+
+# Local databases, dumps, and transient database files
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.dump
+*.backup
+
+# Generated model artifacts and candidate bundles
+models/candidates/
+models/production/
+models/versions/
+models/quarantine/
+models/**/*.pkl
+models/**/*.joblib
+models/**/*.h5
+models/**/*.keras
+models/**/*.onnx
+models/**/*.pt
+models/**/*.pth
+
+# Historical datasets and generated analysis artifacts
+historical-data/
+data/historical/
+data/imports/
+artifacts/ui-audit/
+artifacts/screenshots/
+
+# JavaScript dependencies/build output (if UI tooling is added locally)
+node_modules/
+.npm/
+.yarn/
+.pnpm-store/
+
+# Jupyter and editor metadata
+.ipynb_checkpoints/
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Operating-system files
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+tmp/
+temp/
