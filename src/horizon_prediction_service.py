@@ -154,67 +154,11 @@ class HorizonPredictionService:
     def evaluate_due(self, session=None, now: datetime | None = None) -> int:
         owns_session = session is None
         session = session or get_session()
-        now = aware_utc(now or datetime.now(timezone.utc))
-        changed = 0
         try:
-            query = session.query(HorizonPrediction).filter(
-                HorizonPrediction.status == "PENDING", HorizonPrediction.target_at <= now,
-            ).order_by(HorizonPrediction.target_at)
-            if session.bind.dialect.name == "postgresql":
-                query = query.with_for_update(skip_locked=True)
-            for prediction in query.all():
-                target = aware_utc(prediction.target_at)
-                tolerance = timedelta(seconds=prediction.actual_tolerance_seconds)
-                deadline = target + tolerance
-                actual = session.query(Price).filter(
-                    Price.symbol == prediction.symbol,
-                    Price.source == "live_api",
-                    Price.provider == prediction.provider,
-                    Price.timestamp >= target,
-                    Price.timestamp <= deadline,
-                    Price.timestamp <= now,
-                    Price.price_usd > 0,
-                ).order_by(Price.timestamp.asc()).first()
-                if actual:
-                    actual_at = aware_utc(actual.timestamp)
-                    ingested = aware_utc(actual.ingested_at or actual.created_at or actual.timestamp)
-                    if actual_at > ingested + timedelta(seconds=get_settings().streaming.live_clock_skew_seconds):
-                        actual = None
-                values = {"retry_count": prediction.retry_count + 1}
-                if actual:
-                    reference = Decimal(prediction.reference_price)
-                    predicted = Decimal(prediction.predicted_price)
-                    actual_price = Decimal(str(actual.price_usd))
-                    absolute = abs(actual_price - predicted)
-                    baseline_error = abs(actual_price - Decimal(prediction.baseline_price))
-                    actual_return = (actual_price - reference) / reference
-                    values.update(
-                        status="EVALUATED", actual_price=actual_price, actual_at=actual_at,
-                        actual_provider=actual.provider,
-                        evaluation_delay_seconds=max(0, int((actual_at-target).total_seconds())),
-                        evaluator_version=EVALUATOR_VERSION, absolute_error=absolute,
-                        percentage_error=absolute/reference*100,
-                        baseline_absolute_error=baseline_error,
-                        model_improvement_over_baseline=baseline_error-absolute,
-                        error_amount=float(actual_price-predicted), error_pct=float(absolute/reference*100),
-                        actual_trend=direction_for_return(float(actual_return), float(prediction.direction_threshold)),
-                        direction_correct=prediction.predicted_trend == direction_for_return(float(actual_return), float(prediction.direction_threshold)),
-                        evaluated_at=now, result_class=None, accuracy_score=None,
-                    )
-                elif now >= deadline:
-                    values.update(
-                        status="UNRESOLVABLE", evaluated_at=now, evaluator_version=EVALUATOR_VERSION,
-                        failure_reason=f"No matching {prediction.provider} quote within {prediction.actual_tolerance_seconds} seconds",
-                    )
-                else:
-                    continue
-                updated = session.query(HorizonPrediction).filter(
-                    HorizonPrediction.id == prediction.id,
-                    HorizonPrediction.status == "PENDING",
-                ).update(values, synchronize_session=False)
-                changed += updated
-            session.commit()
-            return changed
+            from src.prediction_evaluator import PredictionEvaluator
+            return PredictionEvaluator(
+                tolerance_seconds=get_settings().streaming.prediction_actual_tolerance_seconds,
+            ).evaluate_due(session, now)
         finally:
             if owns_session:
                 session.close()

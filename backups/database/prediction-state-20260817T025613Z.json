@@ -1,0 +1,21 @@
+{
+  "created_at": "2026-08-17T02:56:14.052167+00:00",
+  "backup": "/Users/developer/PycharmProjects/GoldPricePredicton/backups/database/prediction-state-20260817T025613Z.dump",
+  "tables": [
+    "notification_deliveries",
+    "prediction_decisions",
+    "horizon_predictions",
+    "model_health",
+    "horizon_model_status",
+    "walk_forward_results",
+    "retraining_runs",
+    "training_scheduler_state",
+    "service_heartbeats",
+    "provider_status",
+    "prices",
+    "trading_sessions",
+    "predictions",
+    "features",
+    "models"
+  ]
+}

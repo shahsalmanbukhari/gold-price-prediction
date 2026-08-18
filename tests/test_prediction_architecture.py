@@ -194,7 +194,7 @@ class BundleTests(unittest.TestCase):
                     low_price=price-1, close_price=price))
             session.commit()
             manager = ModelBundleManager(directory)
-            candidate = MultiHorizonTrainer(session, manager).train_candidate("linear_regression")
+            candidate = MultiHorizonTrainer(session, manager).train_candidate("ridge_regression")
             manifest = manager.validate(candidate)
             self.assertEqual(manifest["feature_names"], FEATURE_COLUMNS)
             self.assertEqual(set(manifest["horizons"]), {"3", "5", "15", "30", "60", "240"})
@@ -203,6 +203,20 @@ class BundleTests(unittest.TestCase):
             train, _, _ = chronological_split(dataset)
             scaler = joblib.load(candidate.parent / manifest["horizons"]["3"]["scaler_file"])
             np.testing.assert_allclose(scaler.mean_, train[FEATURE_COLUMNS].mean().to_numpy(), rtol=1e-10)
+            # The compact synthetic fixture cannot span six calendar folds. Add
+            # explicit accepted evidence so this test can exercise atomic bundle
+            # promotion/inference; real candidate training may not fabricate it.
+            approved = json.loads(candidate.read_text())
+            for item in approved["horizons"].values():
+                item["metrics"]["test"].update(
+                    mae=.5, persistence_mae=1.0, directional_accuracy=60.0,
+                    mae_improvement_over_persistence=.5,
+                )
+                item["walk_forward_validation"] = {
+                    "folds": [{"fold_id": index} for index in range(1, 7)],
+                    "stability": {"stable": True},
+                }
+            candidate.write_text(json.dumps(approved))
             promoted = manager.promote(candidate, initial=True)
             self.assertEqual(promoted["model_version"], manager.load_manifest()["model_version"])
             session.add(Price(timestamp=datetime.now(timezone.utc)-timedelta(seconds=2),
@@ -230,7 +244,7 @@ class BundleTests(unittest.TestCase):
             self.assertNotEqual(predictions[0].batch_id, second_batch[0].batch_id)
             self.assertEqual(session.query(HorizonPrediction).count(), 12)
             for item in promoted["horizons"].values():
-                self.assertEqual(len(item["walk_forward_validation"]), 3)
+                self.assertEqual(len(item["walk_forward_validation"]["folds"]), 6)
             # A legacy-shaped fake artifact cannot enter production.
             bad = json.loads(candidate.read_text())
             bad["feature_names"] = [f"legacy_{i}" for i in range(128)]
@@ -242,6 +256,7 @@ class BundleTests(unittest.TestCase):
             original_version = manager.load_manifest()["model_version"]
             rejected = json.loads(candidate.read_text())
             rejected["model_version"] = "deliberately-worse"
+            rejected["horizons"]["3"]["metrics"]["test"]["mae"] = 1.1
             rejected["horizons"]["3"]["metrics"]["test"]["mae_improvement_over_persistence"] = -1
             rejected_path = candidate.parent / "rejected_manifest.json"
             rejected_path.write_text(json.dumps(rejected))
@@ -249,7 +264,7 @@ class BundleTests(unittest.TestCase):
                 manager.promote(rejected_path, initial=False)
             self.assertEqual(rejection.exception.reasons[0]["horizon"], 3)
             self.assertIn("candidate_mae", rejection.exception.reasons[0])
-            self.assertIn("persistence_mae", rejection.exception.reasons[0])
+            self.assertTrue(any("persistence_mae" in reason for reason in rejection.exception.reasons))
             self.assertEqual(rejection.exception.candidate_path, str(candidate.parent))
             self.assertEqual(manager.load_manifest()["model_version"], original_version)
             session.close()

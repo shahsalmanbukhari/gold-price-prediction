@@ -57,7 +57,7 @@ def overview():
             movement=float(latest.predicted_return)*100
             render_kpi_card("Selected Forecast",price(latest.predicted_price),f"{movement:+.2f}% · {str(latest.predicted_trend).upper()} · target {context['horizon']}m",latest.status)
         else:render_kpi_card("Selected Forecast","No forecast",f"No {context['horizon']}m result for the viewing model","NO DATA")
-    with cols[2]:render_kpi_card("Model Quality",price(metrics.get("improvement")),f"vs persistence · {percent(metrics.get('directional_accuracy'))} direction · {metrics.get('evaluated',0)} samples",context["model_status"] or "NO DATA")
+    with cols[2]:render_kpi_card("Improvement over Persistence",percent(metrics.get("improvement_pct")),f"{percent(metrics.get('directional_accuracy'))} direction · {metrics.get('evaluated',0)} evaluated samples",context["model_status"] or "NO DATA")
     with cols[3]:render_kpi_card("System",health.overall_data_status.title(),health.live_detail,health.overall_data_status)
 
     render_section_header("Market and forecast", "Actual live snapshots and the selected horizon; gaps remain visible.")
@@ -199,6 +199,19 @@ def system_health():
     uptime=(datetime.now(timezone.utc)-(heartbeat.started_at if heartbeat.started_at.tzinfo else heartbeat.started_at.replace(tzinfo=timezone.utc))).total_seconds() if heartbeat else None
     metric_row([("Worker",badge(health)),("Instance",heartbeat.instance_id if heartbeat else "—"),("Uptime",duration(uptime)),("Provider",provider.provider_name if provider else "—"),("Provider health",badge("RUNNING" if provider and provider.is_healthy else "DEGRADED")),("PostgreSQL","Connected"),("Redis",redis_state),("Last quote",datetime_text(heartbeat.last_live_quote_at) if heartbeat else "—"),("Last prediction",datetime_text(heartbeat.last_prediction_at) if heartbeat else "—"),("Last evaluation",datetime_text(heartbeat.last_evaluation_at) if heartbeat else "—"),("Last notification",datetime_text(notification.created_at) if notification else "—"),("Last training",datetime_text(heartbeat.last_training_at) if heartbeat else "—")],3)
     if heartbeat and heartbeat.last_error:st.error(f"Current worker diagnostic: {heartbeat.last_error}")
+    model_health=data.latest_model_health(context.get("model_version"))
+    render_section_header("Production model health", "Rolling evaluated outcomes compared with persistence; at least 30 samples are required.")
+    if model_health.empty:
+        empty("No model-health checks yet", "Health checks appear after 30 evaluated predictions for a horizon and model version.")
+    else:
+        dataframe(pd.DataFrame([{
+            "Horizon":f"{int(row.horizon_minutes)}m", "Model version":row.model_version,
+            "Status":badge(row.status), "Model MAE":row.model_mae,
+            "Persistence MAE":row.persistence_mae,
+            "Directional accuracy":percent(float(row.directional_accuracy)*100 if pd.notna(row.directional_accuracy) else None),
+            "Samples":row.sample_count, "Checked":datetime_text(row.checked_at),
+            "Alert sent":"Yes" if row.alert_sent else "No",
+        } for row in model_health.itertuples()]))
     with st.expander("Scheduler watermarks and troubleshooting",expanded=True):
         st.json({"last_candle_id":getattr(scheduler,"last_candle_id",None),"last_outcome_id":getattr(scheduler,"last_outcome_id",None),"last_successful_training":datetime_text(getattr(scheduler,"last_successful_training_at",None)),"last_training_attempt":datetime_text(getattr(scheduler,"last_training_attempt_at",None)),"production_manifest":str(data._production_manifest() or "No approved manifest")},expanded=False)
         st.markdown("Check `logs/background/`, `.env`, PostgreSQL availability and provider timestamps. Secrets are never displayed here.")

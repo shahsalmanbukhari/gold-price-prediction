@@ -261,6 +261,12 @@ class HorizonPrediction(Base):
     evaluated_at = Column(DateTime(timezone=True))
     failure_reason = Column(Text)
     retry_count = Column(Integer, nullable=False, default=0)
+    status_reason = Column(Text)
+    max_retries = Column(Integer, nullable=False, default=3)
+    evaluation_attempts = Column(Integer, nullable=False, default=0)
+    last_evaluation_attempt = Column(DateTime(timezone=True))
+    failed_at = Column(DateTime(timezone=True))
+    unresolvable_reason = Column(Text)
     direction_threshold = Column(Numeric(20, 12), nullable=False, default=0.0005)
     direction_policy_version = Column(String(50), nullable=False, default="direction_v1")
     context = Column(JSON)
@@ -272,6 +278,21 @@ class HorizonPrediction(Base):
             name="uq_production_horizon_prediction",
         ),
     )
+
+
+class ModelHealth(Base):
+    __tablename__ = "model_health"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    horizon_minutes = Column(Integer, nullable=False, index=True)
+    model_version = Column(String(50), nullable=False, index=True)
+    status = Column(String(20), nullable=False)
+    model_mae = Column(Float)
+    persistence_mae = Column(Float)
+    directional_accuracy = Column(Float)
+    sample_count = Column(Integer)
+    checked_at = Column(DateTime, server_default=func.now())
+    alert_sent = Column(Boolean, default=False, server_default="false")
 
 
 class RetrainingRun(Base):
@@ -412,6 +433,47 @@ class GoldPriceCandle(Base):
     provider = Column(String(50), nullable=False)
     source_file = Column(String(255))
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
+
+
+class TradingSession(Base):
+    """Persisted boundaries for contiguous provider candle sessions (UTC)."""
+    __tablename__ = "trading_sessions"
+    __table_args__ = (
+        Index("idx_sessions_time", "session_start", "session_end"),
+    )
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    provider = Column(String(50), nullable=False)
+    symbol = Column(String(20), nullable=False)
+    session_start = Column(DateTime, nullable=False)
+    session_end = Column(DateTime, nullable=False)
+    candle_count = Column(Integer, nullable=False)
+    duration_minutes = Column(Integer, nullable=False)
+    created_at = Column(DateTime, server_default=func.now())
+
+
+class WalkForwardResult(Base):
+    """Immutable fold-level evidence for model robustness."""
+    __tablename__ = "walk_forward_results"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    model_name = Column(String(100))
+    model_version = Column(String(50))
+    horizon_minutes = Column(Integer)
+    fold_id = Column(Integer)
+    train_start = Column(DateTime)
+    train_end = Column(DateTime)
+    test_start = Column(DateTime)
+    test_end = Column(DateTime)
+    train_rows = Column(Integer)
+    test_rows = Column(Integer)
+    mae = Column(Float)
+    rmse = Column(Float)
+    directional_accuracy = Column(Float)
+    persistence_mae = Column(Float)
+    mae_improvement_pct = Column(Float)
+    market_regime = Column(String(50))
+    created_at = Column(DateTime, server_default=func.now())
 
 
 class HistoricalDataImport(Base):

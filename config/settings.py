@@ -119,7 +119,7 @@ class MLSettings(BaseSettings):
     min_samples_for_retrain: int = Field(default=50, validation_alias="MIN_SAMPLES_FOR_RETRAIN")
     retrain_interval_hours: int = Field(default=24, validation_alias="RETRAIN_INTERVAL_HOURS")
     retrain_check_interval: int = Field(default=60, validation_alias="RETRAIN_CHECK_INTERVAL")
-    training_max_candles: int = Field(default=250000, validation_alias="TRAINING_MAX_CANDLES")
+    training_max_candles: int = Field(default=0, validation_alias="TRAINING_MAX_CANDLES")
     training_ratio: float = Field(default=0.70, validation_alias="TRAINING_RATIO")
     validation_ratio: float = Field(default=0.15, validation_alias="VALIDATION_RATIO")
     test_ratio: float = Field(default=0.15, validation_alias="TEST_RATIO")
@@ -129,6 +129,13 @@ class MLSettings(BaseSettings):
     )
     performance_minimum_samples: int = Field(
         default=50, validation_alias="PERFORMANCE_MINIMUM_SAMPLES"
+    )
+    walk_forward_train_years: int = Field(default=3, validation_alias="WALK_FORWARD_TRAIN_YEARS")
+    walk_forward_test_months: int = Field(default=6, validation_alias="WALK_FORWARD_TEST_MONTHS")
+    walk_forward_step_months: int = Field(default=6, validation_alias="WALK_FORWARD_STEP_MONTHS")
+    walk_forward_minimum_folds: int = Field(default=6, validation_alias="WALK_FORWARD_MINIMUM_FOLDS")
+    promotion_minimum_mae_improvement: float = Field(
+        default=0.02, validation_alias="PROMOTION_MINIMUM_MAE_IMPROVEMENT"
     )
 
 

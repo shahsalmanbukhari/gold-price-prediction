@@ -5,6 +5,7 @@ New callers should use ``MultiHorizonTrainer`` and ``ModelBundleManager``.
 """
 
 from src.candle_features import build_horizon_dataset
+from src.baselines import should_promote
 from src.database import get_session
 from src.model_pipeline import ModelBundleManager, MultiHorizonTrainer
 

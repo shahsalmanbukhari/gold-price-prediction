@@ -12,7 +12,7 @@ from config.settings import get_settings
 from src.background_lifecycle import HeartbeatService, WORKER_NAME
 from src.database import (
     GoldPriceCandle, HistoricalDataImport, HorizonModelStatus, HorizonPrediction,
-    NotificationDelivery, PredictionDecision, Price, ProviderStatus, RetrainingRun,
+    NotificationDelivery, PredictionDecision, Price, ProviderStatus, RetrainingRun, ModelHealth,
     ServiceHeartbeat, TrainingSchedulerState, get_session,
     latest_valid_live_price,
 )
@@ -128,13 +128,16 @@ def performance(frame):
     actual = pd.to_numeric(evaluated.actual_price, errors="coerce")
     predicted = pd.to_numeric(evaluated.predicted_price, errors="coerce")
     denominator = actual.abs()+predicted.abs()
+    baseline_mae = baseline.mean()
+    mae = error.mean()
     return {
         "evaluated":len(evaluated), "pending":int((frame.status=="PENDING").sum()),
         "unresolvable":int((frame.status=="UNRESOLVABLE").sum()),
-        "mae":error.mean(), "rmse":float(np.sqrt(np.nanmean(error**2))),
+        "mae":mae, "rmse":float(np.sqrt(np.nanmean(error**2))),
         "smape":float(np.nanmean(2*error/denominator*100)),
         "directional_accuracy":pd.to_numeric(evaluated.direction_correct, errors="coerce").mean()*100,
-        "baseline_mae":baseline.mean(), "improvement":baseline.mean()-error.mean(),
+        "baseline_mae":baseline_mae, "improvement":baseline_mae-mae,
+        "improvement_pct":((baseline_mae-mae)/baseline_mae*100) if baseline_mae else None,
         "median_delay":pd.to_numeric(evaluated.evaluation_delay_seconds, errors="coerce").median(),
     }
 
@@ -202,3 +205,19 @@ def system_state():
         notification=session.query(NotificationDelivery).order_by(NotificationDelivery.created_at.desc()).first()
         return heartbeat, provider, scheduler, notification, HeartbeatService.health(heartbeat)
     finally: session.close()
+
+
+def latest_model_health(model_version=None):
+    session = get_session()
+    try:
+        query = session.query(ModelHealth)
+        if model_version:
+            query = query.filter(ModelHealth.model_version == model_version)
+        rows = query.order_by(ModelHealth.checked_at.desc()).all()
+        latest = {}
+        for row in rows:
+            latest.setdefault((row.horizon_minutes, row.model_version), row)
+        return pd.DataFrame([{column.name: getattr(row, column.name) for column in row.__table__.columns}
+                             for row in latest.values()])
+    finally:
+        session.close()

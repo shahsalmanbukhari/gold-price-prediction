@@ -107,6 +107,23 @@ class BackgroundTrainingScheduler:
         self._training_task = asyncio.create_task(self._train(reason))
         return True
 
+    def request_retraining(self, reason="model_degradation"):
+        """Persist an idempotent manual review request; training remains asynchronous."""
+        session = self.session_factory()
+        try:
+            existing = session.query(RetrainingRun).filter(
+                func.lower(RetrainingRun.status) == "pending",
+                RetrainingRun.trigger == reason,
+            ).first()
+            if existing:
+                return existing.id
+            run = RetrainingRun(trigger=reason, status="PENDING", model_name=self.model_name)
+            session.add(run)
+            session.commit()
+            return run.id
+        finally:
+            session.close()
+
     def _train_sync(self, reason):
         session = self.session_factory()
         run = session.query(RetrainingRun).filter(func.lower(RetrainingRun.status) == "pending").order_by(

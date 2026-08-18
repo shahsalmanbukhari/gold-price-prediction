@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 import sklearn
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, Ridge
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.preprocessing import StandardScaler
 from sqlalchemy import text
@@ -26,6 +26,10 @@ from sqlalchemy import text
 from config.settings import get_settings
 from src.candle_data_service import CandleDataService
 from src.candle_features import FEATURE_COLUMNS, FEATURE_SCHEMA_VERSION, HORIZONS, build_horizon_dataset
+from src.session_builder import build_sessions, persist_sessions
+from src.baselines import should_promote
+from src.walk_forward import WalkForwardValidator
+from src.database import WalkForwardResult
 
 BUNDLE_VERSION = "trained_horizon_bundle_v1"
 TARGET_DEFINITION = "(close_at_exact_t_plus_h - close_at_t) / close_at_t"
@@ -167,6 +171,7 @@ class ModelBundleManager:
 
     def promote(self, candidate_manifest: Path, initial=False) -> dict[str, Any]:
         candidate = self.validate(candidate_manifest)
+        policy = get_settings().ml
         if self.production_manifest_path.exists() and initial:
             raise RuntimeError("Initial training refused: an approved production bundle already exists")
         reasons = []
@@ -185,8 +190,12 @@ class ModelBundleManager:
                         "test_sample_count": candidate["horizons"][str(horizon)]["split_counts"]["test"],
                     })
         for horizon in HORIZONS:
-            metrics = candidate["horizons"][str(horizon)]["metrics"]["test"]
-            samples = candidate["horizons"][str(horizon)]["split_counts"]["test"]
+            horizon_item = candidate["horizons"][str(horizon)]
+            metrics = horizon_item["metrics"]["test"]
+            samples = horizon_item["split_counts"]["test"]
+            walk_forward = horizon_item.get("walk_forward_validation", {})
+            stability = walk_forward.get("stability", {})
+            folds = walk_forward.get("folds", [])
             common = {
                 "horizon": horizon, "candidate_mae": metrics.get("mae"),
                 "candidate_rmse": metrics.get("rmse"),
@@ -195,15 +204,24 @@ class ModelBundleManager:
                 "test_sample_count": samples,
                 "candidate_directional_accuracy": metrics.get("directional_accuracy"),
                 "baseline_directional_accuracy": metrics.get("common_direction_accuracy"),
+                "walk_forward_fold_count": len(folds),
+                "walk_forward_stability": stability,
             }
             if samples < get_settings().ml.minimum_test_samples:
                 reasons.append({**common, "criterion": "insufficient_test_samples"})
             if not all(np.isfinite(metrics[k]) for k in ("mae", "rmse", "smape", "directional_accuracy")):
                 reasons.append({**common, "criterion": "non_finite_metrics"})
-            if metrics["mae_improvement_over_persistence"] < 0:
+            accepted, gate_reason = should_promote(
+                {"n_samples": samples, "mae": metrics["mae"],
+                 "directional_accuracy": metrics["directional_accuracy"] / 100},
+                {"mae": metrics["persistence_mae"]},
+                threshold=policy.promotion_minimum_mae_improvement,
+                stable=(bool(stability.get("stable")) and len(folds) >= policy.walk_forward_minimum_folds),
+            )
+            if not accepted:
                 difference = metrics["mae"] - metrics["persistence_mae"]
                 reasons.append({
-                    **common, "criterion": "worse_than_persistence",
+                    **common, "criterion": "promotion_gate_failed", "gate_reason": gate_reason,
                     "absolute_difference": difference,
                     "percentage_improvement": (
                         (metrics["persistence_mae"]-metrics["mae"])/metrics["persistence_mae"]*100
@@ -244,6 +262,8 @@ class MultiHorizonTrainer:
     def _model(self, algorithm):
         if algorithm == "linear_regression":
             return LinearRegression()
+        if algorithm == "ridge_regression":
+            return Ridge(alpha=1.0)
         if algorithm == "random_forest":
             return RandomForestRegressor(n_estimators=100, max_depth=14, random_state=42, n_jobs=-1)
         if algorithm == "xgboost":
@@ -252,30 +272,16 @@ class MultiHorizonTrainer:
         raise ValueError(f"Unsupported algorithm: {algorithm}")
 
     def _walk_forward(self, dataset, algorithm):
-        """Three expanding chronological folds wholly before the final test region."""
-        ordered = dataset.sort_values("Date").reset_index(drop=True)
-        folds = []
-        for training_fraction in (.25, .40, .55):
-            train_end = ordered.iloc[int(len(ordered) * training_fraction)]["Date"]
-            validation_end = ordered.iloc[int(len(ordered) * (training_fraction + .15))]["Date"]
-            fold_train = ordered[(ordered.Date <= train_end) & (ordered.target_time <= train_end)]
-            fold_validation = ordered[(ordered.Date > train_end + pd.Timedelta(minutes=max(HORIZONS)))
-                                      & (ordered.Date <= validation_end)
-                                      & (ordered.target_time <= validation_end)]
-            if fold_train.empty or fold_validation.empty:
-                continue
-            scaler = StandardScaler().fit(fold_train[FEATURE_COLUMNS])
-            model = self._model(algorithm)
-            model.fit(scaler.transform(fold_train[FEATURE_COLUMNS]), fold_train.target_return)
-            predicted = model.predict(scaler.transform(fold_validation[FEATURE_COLUMNS]))
-            common = int(pd.Series(_direction(fold_train.target_return)).mode().iloc[0])
-            folds.append({
-                "train_range": [_utc(fold_train.Date.min()).isoformat(), _utc(fold_train.Date.max()).isoformat()],
-                "validation_range": [_utc(fold_validation.Date.min()).isoformat(), _utc(fold_validation.Date.max()).isoformat()],
-                "train_rows": len(fold_train), "validation_rows": len(fold_validation),
-                "metrics": regression_metrics(fold_validation.target_return, predicted, common_direction=common),
-            })
-        return folds
+        validator = WalkForwardValidator(dataset, int(dataset.horizon_minutes.iloc[0]), {
+            "train_years": self.settings.walk_forward_train_years,
+            "test_months": self.settings.walk_forward_test_months,
+            "step_months": self.settings.walk_forward_step_months,
+        })
+        results = validator.validate(lambda: self._model(algorithm))
+        return {
+            "folds": results.to_dict("records"),
+            "stability": validator.assess_stability(results),
+        }
 
     def train_candidate(self, algorithm="linear_regression") -> Path:
         version = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + algorithm
@@ -284,13 +290,19 @@ class MultiHorizonTrainer:
         candles = CandleDataService(self.session).completed_1m(limit=self.settings.training_max_candles)
         from src.candle_features import candles_to_frame
         frame = candles_to_frame(candles)
+        sessions = build_sessions(frame)
+        new_session_rows = persist_sessions(self.session, sessions, provider="histdata", symbol="XAUUSD")
+        self.session.commit()
         manifest: dict[str, Any] = {
             "bundle_version": BUNDLE_VERSION, "model_version": version, "algorithm": algorithm,
             "feature_schema_version": FEATURE_SCHEMA_VERSION, "feature_names": FEATURE_COLUMNS,
             "target_definition": TARGET_DEFINITION, "created_at": datetime.now(timezone.utc).isoformat(),
             "training_data": {"provider": "histdata", "symbol": "XAUUSD", "timeframe": "1m",
                               "minimum_time": _utc(frame.Date.min()).isoformat(), "maximum_time": _utc(frame.Date.max()).isoformat(),
-                              "loaded_rows": len(frame), "gap_policy": "exact target and continuous 30-candle feature session"},
+                              "loaded_rows": len(frame), "gap_policy": "exact target and continuous 30-candle feature session",
+                              "trading_session_gap_threshold_minutes": 5,
+                              "trading_session_count": len(sessions),
+                              "new_trading_session_rows": new_session_rows},
             "split_policy": {"train": self.settings.training_ratio, "validation": self.settings.validation_ratio,
                              "test": self.settings.test_ratio, "purge_minutes": max(HORIZONS)},
             "library_versions": {"python": platform.python_version(), "scikit_learn": sklearn.__version__,
@@ -345,4 +357,21 @@ class MultiHorizonTrainer:
         manifest_path = target / "manifest.json"
         manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True, default=str) + "\n")
         self.manager.validate(manifest_path)
+        for horizon, item in manifest["horizons"].items():
+            for fold in item["walk_forward_validation"]["folds"]:
+                def naive_utc(value):
+                    return _utc(value).to_pydatetime().replace(tzinfo=None)
+                self.session.add(WalkForwardResult(
+                    model_name=item["algorithm"], model_version=version,
+                    horizon_minutes=int(horizon), fold_id=int(fold["fold_id"]),
+                    train_start=naive_utc(fold["train_start"]), train_end=naive_utc(fold["train_end"]),
+                    test_start=naive_utc(fold["test_start"]), test_end=naive_utc(fold["test_end"]),
+                    train_rows=int(fold["train_rows"]), test_rows=int(fold["test_rows"]),
+                    mae=float(fold["mae"]), rmse=float(fold["rmse"]),
+                    directional_accuracy=float(fold["directional_accuracy"]),
+                    persistence_mae=float(fold["persistence_mae"]),
+                    mae_improvement_pct=float(fold["mae_improvement_pct"]),
+                    market_regime=fold["market_regime"],
+                ))
+        self.session.commit()
         return manifest_path

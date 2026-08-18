@@ -21,7 +21,8 @@ from realtime.data_handler import DataHandler
 from realtime.redis_cache import get_redis_cache
 from config.settings import get_settings
 from realtime.training_scheduler import BackgroundTrainingScheduler
-from src.database import HorizonPrediction, RetrainingRun, PredictionDecision, get_session, save_unique_price_from_response, update_provider_status
+from src.database import HorizonPrediction, RetrainingRun, PredictionDecision, HorizonModelStatus, get_session, save_unique_price_from_response, update_provider_status
+from src.model_health import monitor_from_predictions
 from src.horizon_prediction_service import HorizonPredictionService
 from src.background_lifecycle import HeartbeatService, NotificationService, TrustService
 from src.model_pipeline import ModelBundleManager
@@ -328,12 +329,28 @@ class EnhancedGoldStreamer:
             try:
                 now = datetime.now(timezone.utc)
                 due_ids = [row[0] for row in session.query(HorizonPrediction.id).filter(
-                    HorizonPrediction.status == "PENDING", HorizonPrediction.target_at <= now,
+                    HorizonPrediction.status.in_(("PENDING", "RETRYING")), HorizonPrediction.target_at <= now,
                 ).all()]
                 changed = self.prediction_service.evaluate_due(session, now=now)
                 evaluated = session.query(HorizonPrediction).filter(
                     HorizonPrediction.id.in_(due_ids), HorizonPrediction.status == "EVALUATED",
                 ).all() if due_ids else []
+                degraded_horizons = set()
+                for prediction in evaluated:
+                    monitor = monitor_from_predictions(
+                        session, prediction.horizon_minutes, prediction.model_version,
+                    )
+                    if monitor.status == "DEGRADED":
+                        degraded_horizons.add(prediction.horizon_minutes)
+                        state = session.get(HorizonModelStatus, (prediction.horizon_minutes, prediction.model_version))
+                        if state:
+                            state.trust_status = "DEGRADED"
+                            state.alert_suppression_reason = monitor.alerts[-1]["message"] if monitor.alerts else "Model health degraded"
+                            state.updated_at = now
+                if degraded_horizons:
+                    session.commit()
+                    for horizon in degraded_horizons:
+                        self.training_scheduler.request_retraining(reason=f"model_degraded_{horizon}m")
                 self.notifications.enqueue_outcomes(session, evaluated)
                 try:
                     manifest = ModelBundleManager().load_manifest()

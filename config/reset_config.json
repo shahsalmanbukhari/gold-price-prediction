@@ -1,0 +1,14 @@
+{
+  "stop_services": true,
+  "backup_database": true,
+  "reset_database": true,
+  "reset_artifacts": true,
+  "rebuild_sessions": true,
+  "retrain_models": true,
+  "run_validation": true,
+  "start_services": true,
+  "horizons": [3, 5, 15, 30, 60, 240],
+  "gap_threshold_minutes": 5,
+  "training_algorithm": "benchmark",
+  "minimum_walk_forward_folds": 6
+}

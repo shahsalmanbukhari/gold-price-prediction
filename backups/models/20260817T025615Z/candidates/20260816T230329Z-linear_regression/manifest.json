@@ -1,0 +1,525 @@
+{
+  "algorithm": "linear_regression",
+  "bundle_version": "trained_horizon_bundle_v1",
+  "created_at": "2026-08-16T23:03:37.041602+00:00",
+  "feature_names": [
+    "Open",
+    "High",
+    "Low",
+    "Close",
+    "SMA_7",
+    "SMA_14",
+    "SMA_30",
+    "EMA_7",
+    "EMA_14",
+    "Price_Change",
+    "Price_Change_Pct",
+    "Volatility_7",
+    "Volatility_14",
+    "RSI_14",
+    "Close_Lag_1",
+    "Close_Lag_2",
+    "Close_Lag_3",
+    "Close_Lag_7"
+  ],
+  "feature_schema_version": "candle_features_v1",
+  "horizons": {
+    "15": {
+      "checksums": {
+        "model_file": "d5c9f48d174a3169ccf1704f3ee221752f8d08fcf12c2285bae802e861f62bf9",
+        "scaler_file": "097a4e7b9de898541b2040c8897ea280929484dd3ae1a87de2405a04ed58063c"
+      },
+      "common_training_direction": 0,
+      "horizon": 15,
+      "hyperparameters": {
+        "copy_X": true,
+        "fit_intercept": true,
+        "n_jobs": null,
+        "positive": false
+      },
+      "metrics": {
+        "test": {
+          "common_direction_accuracy": 38.03992237316329,
+          "directional_accuracy": 38.042694760188525,
+          "mae": 0.0009423804798425814,
+          "mae_improvement_over_persistence": -4.8445301014120356e-06,
+          "persistence_mae": 0.0009375359497411694,
+          "persistence_rmse": 0.0013322720049922748,
+          "r2": -0.004160044484531333,
+          "rmse": 0.0013347632636356178,
+          "rmse_improvement_over_persistence": -2.491258643342936e-06,
+          "smape": 168.79584888674054,
+          "zero_return_mae": 0.0009375359497411694,
+          "zero_return_rmse": 0.0013322720049922748
+        },
+        "train": {
+          "common_direction_accuracy": 33.948579609318614,
+          "directional_accuracy": 33.958044936641464,
+          "mae": 0.0012697843175222482,
+          "mae_improvement_over_persistence": 1.5612898301726325e-07,
+          "persistence_mae": 0.0012699404465052655,
+          "persistence_rmse": 0.0021087969777848674,
+          "r2": 0.0009618809991257526,
+          "rmse": 0.0021077818444789724,
+          "rmse_improvement_over_persistence": 1.015133305895012e-06,
+          "smape": 182.10724620558815,
+          "zero_return_mae": 0.0012699404465052655,
+          "zero_return_rmse": 0.0021087969777848674
+        },
+        "validation": {
+          "common_direction_accuracy": 32.74582302410275,
+          "directional_accuracy": 32.75416307581107,
+          "mae": 0.0011776487429591437,
+          "mae_improvement_over_persistence": -6.241858597231002e-06,
+          "persistence_mae": 0.0011714068843619127,
+          "persistence_rmse": 0.0017318028078837555,
+          "r2": -0.005498623857194351,
+          "rmse": 0.0017358982625201975,
+          "rmse_improvement_over_persistence": -4.095454636441958e-06,
+          "smape": 174.452480401495,
+          "zero_return_mae": 0.0011714068843619127,
+          "zero_return_rmse": 0.0017318028078837555
+        }
+      },
+      "model_file": "model_15m.joblib",
+      "scaler_file": "scaler_15m.joblib",
+      "split_counts": {
+        "test": 36070,
+        "train": 169038,
+        "validation": 35971
+      },
+      "split_ranges": {
+        "test": {
+          "maximum": "2026-08-14T21:43:00+00:00",
+          "minimum": "2026-07-08T23:29:00+00:00"
+        },
+        "train": {
+          "maximum": "2026-06-01T07:32:00+00:00",
+          "minimum": "2025-11-28T11:18:00+00:00"
+        },
+        "validation": {
+          "maximum": "2026-07-08T18:53:00+00:00",
+          "minimum": "2026-06-01T11:48:00+00:00"
+        }
+      }
+    },
+    "240": {
+      "checksums": {
+        "model_file": "63fbc2d4a48f13ca3ab80343fded2c8e6de35fc753e6266db6e0f08a56d83c05",
+        "scaler_file": "0fb7183d3778b25e0a5cbef06a7fa250e8575e6e6d0b0a0f40dbb2c759f9d319"
+      },
+      "common_training_direction": 1,
+      "horizon": 240,
+      "hyperparameters": {
+        "copy_X": true,
+        "fit_intercept": true,
+        "n_jobs": null,
+        "positive": false
+      },
+      "metrics": {
+        "test": {
+          "common_direction_accuracy": 45.75399912070073,
+          "directional_accuracy": 45.52064662315263,
+          "mae": 0.004406156859447333,
+          "mae_improvement_over_persistence": -0.00018801850428313335,
+          "persistence_mae": 0.0042181383551642,
+          "persistence_rmse": 0.005480472199643523,
+          "r2": -0.03308254859125426,
+          "rmse": 0.005554165206781935,
+          "rmse_improvement_over_persistence": -7.369300713841193e-05,
+          "smape": 150.57142419947434,
+          "zero_return_mae": 0.0042181383551642,
+          "zero_return_rmse": 0.005480472199643523
+        },
+        "train": {
+          "common_direction_accuracy": 46.20065386775741,
+          "directional_accuracy": 30.991747439978106,
+          "mae": 0.005176534129965007,
+          "mae_improvement_over_persistence": -3.208995025354676e-05,
+          "persistence_mae": 0.00514444417971146,
+          "persistence_rmse": 0.007971732022067666,
+          "r2": 0.012746490509040087,
+          "rmse": 0.007917873975278326,
+          "rmse_improvement_over_persistence": 5.385804678934014e-05,
+          "smape": 164.69537498165036,
+          "zero_return_mae": 0.00514444417971146,
+          "zero_return_rmse": 0.007971732022067666
+        },
+        "validation": {
+          "common_direction_accuracy": 42.04615070451297,
+          "directional_accuracy": 39.19066094888027,
+          "mae": 0.005445179262259017,
+          "mae_improvement_over_persistence": -0.00017448453868880182,
+          "persistence_mae": 0.005270694723570215,
+          "persistence_rmse": 0.007212964524248906,
+          "r2": -0.04360505658660685,
+          "rmse": 0.0073464319528499375,
+          "rmse_improvement_over_persistence": -0.00013346742860103136,
+          "smape": 157.5850541553438,
+          "zero_return_mae": 0.005270694723570215,
+          "zero_return_rmse": 0.007212964524248906
+        }
+      },
+      "model_file": "model_240m.joblib",
+      "scaler_file": "scaler_240m.joblib",
+      "split_counts": {
+        "test": 29569,
+        "train": 138866,
+        "validation": 29382
+      },
+      "split_ranges": {
+        "test": {
+          "maximum": "2026-08-14T17:58:00+00:00",
+          "minimum": "2026-07-09T06:35:00+00:00"
+        },
+        "train": {
+          "maximum": "2026-06-01T07:42:00+00:00",
+          "minimum": "2025-11-28T11:18:00+00:00"
+        },
+        "validation": {
+          "maximum": "2026-07-08T17:59:00+00:00",
+          "minimum": "2026-06-01T15:43:00+00:00"
+        }
+      }
+    },
+    "3": {
+      "checksums": {
+        "model_file": "2a13175f08117f40b810fcbcf6fc304e7ad541e6ae761405357025cfdab6f1c3",
+        "scaler_file": "4a1eb42ba75762bd61a59fd372ad9befa5a1453b353e93a241d7607d444f97ca"
+      },
+      "common_training_direction": 0,
+      "horizon": 3,
+      "hyperparameters": {
+        "copy_X": true,
+        "fit_intercept": true,
+        "n_jobs": null,
+        "positive": false
+      },
+      "metrics": {
+        "test": {
+          "common_direction_accuracy": 70.92652635049733,
+          "directional_accuracy": 70.92927405616311,
+          "mae": 0.0004152804016486049,
+          "mae_improvement_over_persistence": -2.480276205465309e-07,
+          "persistence_mae": 0.0004150323740280584,
+          "persistence_rmse": 0.0006077963912183859,
+          "r2": -0.0011180334171965178,
+          "rmse": 0.0006081116577726602,
+          "rmse_improvement_over_persistence": -3.1526655427428513e-07,
+          "smape": 180.92399134423954,
+          "zero_return_mae": 0.0004150323740280584,
+          "zero_return_rmse": 0.0006077963912183859
+        },
+        "train": {
+          "common_direction_accuracy": 61.91968968083299,
+          "directional_accuracy": 61.92789298207578,
+          "mae": 0.000578181771774962,
+          "mae_improvement_over_persistence": 3.362654490182129e-07,
+          "persistence_mae": 0.0005785180372239802,
+          "persistence_rmse": 0.0009624220259870857,
+          "r2": 0.0012552810339436782,
+          "rmse": 0.0009618177663248208,
+          "rmse_improvement_over_persistence": 6.042596622649662e-07,
+          "smape": 184.8304243091473,
+          "zero_return_mae": 0.0005785180372239802,
+          "zero_return_rmse": 0.0009624220259870857
+        },
+        "validation": {
+          "common_direction_accuracy": 62.340343536665934,
+          "directional_accuracy": 62.348601629597,
+          "mae": 0.0005193116385684102,
+          "mae_improvement_over_persistence": -5.66304265940806e-07,
+          "persistence_mae": 0.0005187453343024694,
+          "persistence_rmse": 0.0007622926013996084,
+          "r2": -0.0018883567326570816,
+          "rmse": 0.0007629634036777443,
+          "rmse_improvement_over_persistence": -6.708022781358848e-07,
+          "smape": 183.97429517530216,
+          "zero_return_mae": 0.0005187453343024694,
+          "zero_return_rmse": 0.0007622926013996084
+        }
+      },
+      "model_file": "model_3m.joblib",
+      "scaler_file": "scaler_3m.joblib",
+      "split_counts": {
+        "test": 36394,
+        "train": 170663,
+        "validation": 36328
+      },
+      "split_ranges": {
+        "test": {
+          "maximum": "2026-08-14T21:55:00+00:00",
+          "minimum": "2026-07-08T23:29:00+00:00"
+        },
+        "train": {
+          "maximum": "2026-06-01T07:25:00+00:00",
+          "minimum": "2025-11-28T11:18:00+00:00"
+        },
+        "validation": {
+          "maximum": "2026-07-08T18:55:00+00:00",
+          "minimum": "2026-06-01T11:29:00+00:00"
+        }
+      }
+    },
+    "30": {
+      "checksums": {
+        "model_file": "0648016653538ceb1bca756ff424b4d122fe2a69dfdce347b8d0f205f8307db7",
+        "scaler_file": "858f82338e0af3c7be9394a82f868b7b1812f74f754c9bdb63c578ba08021532"
+      },
+      "common_training_direction": 1,
+      "horizon": 30,
+      "hyperparameters": {
+        "copy_X": true,
+        "fit_intercept": true,
+        "n_jobs": null,
+        "positive": false
+      },
+      "metrics": {
+        "test": {
+          "common_direction_accuracy": 36.366185335763355,
+          "directional_accuracy": 27.517173699705594,
+          "mae": 0.0013579066094072088,
+          "mae_improvement_over_persistence": -1.2326010445771638e-05,
+          "persistence_mae": 0.0013455805989614372,
+          "persistence_rmse": 0.0018859243397010847,
+          "r2": -0.006902504339695303,
+          "rmse": 0.0018915657456725554,
+          "rmse_improvement_over_persistence": -5.641405971470656e-06,
+          "smape": 162.81482663575818,
+          "zero_return_mae": 0.0013455805989614372,
+          "zero_return_rmse": 0.0018859243397010847
+        },
+        "train": {
+          "common_direction_accuracy": 38.670235379355354,
+          "directional_accuracy": 24.64387720275198,
+          "mae": 0.0017942939592284538,
+          "mae_improvement_over_persistence": 2.8879777756209146e-07,
+          "persistence_mae": 0.001794582757006016,
+          "persistence_rmse": 0.0029719228141989445,
+          "r2": 0.0021914561671206867,
+          "rmse": 0.002968657777957787,
+          "rmse_improvement_over_persistence": 3.265036241157336e-06,
+          "smape": 177.62732044637048,
+          "zero_return_mae": 0.001794582757006016,
+          "zero_return_rmse": 0.0029719228141989445
+        },
+        "validation": {
+          "common_direction_accuracy": 35.95315842810494,
+          "directional_accuracy": 22.79585632248621,
+          "mae": 0.0017016791003976895,
+          "mae_improvement_over_persistence": -1.6674301268019588e-05,
+          "persistence_mae": 0.00168500479912967,
+          "persistence_rmse": 0.0024759076146594204,
+          "r2": -0.012536760157715321,
+          "rmse": 0.0024894813303756457,
+          "rmse_improvement_over_persistence": -1.3573715716225232e-05,
+          "smape": 169.82419809750436,
+          "zero_return_mae": 0.00168500479912967,
+          "zero_return_rmse": 0.0024759076146594204
+        }
+      },
+      "model_file": "model_30m.joblib",
+      "scaler_file": "scaler_30m.joblib",
+      "split_counts": {
+        "test": 35665,
+        "train": 167007,
+        "validation": 35524
+      },
+      "split_ranges": {
+        "test": {
+          "maximum": "2026-08-14T21:28:00+00:00",
+          "minimum": "2026-07-08T23:29:00+00:00"
+        },
+        "train": {
+          "maximum": "2026-06-01T07:41:00+00:00",
+          "minimum": "2025-11-28T11:18:00+00:00"
+        },
+        "validation": {
+          "maximum": "2026-07-08T18:50:00+00:00",
+          "minimum": "2026-06-01T12:12:00+00:00"
+        }
+      }
+    },
+    "5": {
+      "checksums": {
+        "model_file": "6740451b49079e8c9ad06d434ff84af83f156e3fcafb34036ce39671893e9108",
+        "scaler_file": "188ae22d2e21926751a1a3f3dc1ebb04589fa6ec6c53436e908b04a2ac38694f"
+      },
+      "common_training_direction": 0,
+      "horizon": 5,
+      "hyperparameters": {
+        "copy_X": true,
+        "fit_intercept": true,
+        "n_jobs": null,
+        "positive": false
+      },
+      "metrics": {
+        "test": {
+          "common_direction_accuracy": 60.0440286186021,
+          "directional_accuracy": 60.03852504127683,
+          "mae": 0.0005368130675198348,
+          "mae_improvement_over_persistence": -1.0008838131094194e-06,
+          "persistence_mae": 0.0005358121837067254,
+          "persistence_rmse": 0.0007753915909344846,
+          "r2": -0.0017607888543400563,
+          "rmse": 0.0007760203787078746,
+          "rmse_improvement_over_persistence": -6.287877733900538e-07,
+          "smape": 178.03041325662923,
+          "zero_return_mae": 0.0005358121837067254,
+          "zero_return_rmse": 0.0007753915909344846
+        },
+        "train": {
+          "common_direction_accuracy": 52.03706746795624,
+          "directional_accuracy": 52.078736090896285,
+          "mae": 0.0007446727423388652,
+          "mae_improvement_over_persistence": 3.272833652187123e-07,
+          "persistence_mae": 0.0007450000257040839,
+          "persistence_rmse": 0.0012380289986225958,
+          "r2": 0.0016808263660293976,
+          "rmse": 0.0012369880873944615,
+          "rmse_improvement_over_persistence": 1.040911228134293e-06,
+          "smape": 183.4114223621091,
+          "zero_return_mae": 0.0007450000257040839,
+          "zero_return_rmse": 0.0012380289986225958
+        },
+        "validation": {
+          "common_direction_accuracy": 51.68325567288869,
+          "directional_accuracy": 51.69428437508616,
+          "mae": 0.0006736256473318526,
+          "mae_improvement_over_persistence": -1.6245499709769459e-06,
+          "persistence_mae": 0.0006720010973608756,
+          "persistence_rmse": 0.0009858913543203732,
+          "r2": -0.0032416790393545725,
+          "rmse": 0.0009873766092678706,
+          "rmse_improvement_over_persistence": -1.4852549474974296e-06,
+          "smape": 182.1994754239288,
+          "zero_return_mae": 0.0006720010973608756,
+          "zero_return_rmse": 0.0009858913543203732
+        }
+      },
+      "model_file": "model_5m.joblib",
+      "scaler_file": "scaler_5m.joblib",
+      "split_counts": {
+        "test": 36340,
+        "train": 170392,
+        "validation": 36269
+      },
+      "split_ranges": {
+        "test": {
+          "maximum": "2026-08-14T21:53:00+00:00",
+          "minimum": "2026-07-08T23:29:00+00:00"
+        },
+        "train": {
+          "maximum": "2026-06-01T07:26:00+00:00",
+          "minimum": "2025-11-28T11:18:00+00:00"
+        },
+        "validation": {
+          "maximum": "2026-07-08T18:55:00+00:00",
+          "minimum": "2026-06-01T11:32:00+00:00"
+        }
+      }
+    },
+    "60": {
+      "checksums": {
+        "model_file": "3fe84ca529d6afbb674b2905a0d9ad20df6feadd8a1dd423fcea7962ce0e52bf",
+        "scaler_file": "ba7f40e675efe04512b5db2f7ca5dcef39da2a85f7607e55b7fb8d6d10af6dc2"
+      },
+      "common_training_direction": 1,
+      "horizon": 60,
+      "hyperparameters": {
+        "copy_X": true,
+        "fit_intercept": true,
+        "n_jobs": null,
+        "positive": false
+      },
+      "metrics": {
+        "test": {
+          "common_direction_accuracy": 40.263429752066116,
+          "directional_accuracy": 22.8133608815427,
+          "mae": 0.001937126640005295,
+          "mae_improvement_over_persistence": -3.054432419932621e-05,
+          "persistence_mae": 0.0019065823158059688,
+          "persistence_rmse": 0.002627645961070401,
+          "r2": -0.008573477044703681,
+          "rmse": 0.0026361077869175914,
+          "rmse_improvement_over_persistence": -8.461825847190518e-06,
+          "smape": 158.59720739925493,
+          "zero_return_mae": 0.0019065823158059688,
+          "zero_return_rmse": 0.002627645961070401
+        },
+        "train": {
+          "common_direction_accuracy": 42.710416845618646,
+          "directional_accuracy": 18.672155890689996,
+          "mae": 0.0025521333054046233,
+          "mae_improvement_over_persistence": 1.428383488294438e-07,
+          "persistence_mae": 0.0025522761437534527,
+          "persistence_rmse": 0.004179259084808676,
+          "r2": 0.004507935807481767,
+          "rmse": 0.004169800552381571,
+          "rmse_improvement_over_persistence": 9.458532427105391e-06,
+          "smape": 173.49126479118584,
+          "zero_return_mae": 0.0025522761437534527,
+          "zero_return_rmse": 0.004179259084808676
+        },
+        "validation": {
+          "common_direction_accuracy": 38.23546394133611,
+          "directional_accuracy": 21.164616894739883,
+          "mae": 0.002467740705160346,
+          "mae_improvement_over_persistence": -4.021381084278689e-05,
+          "persistence_mae": 0.002427526894317559,
+          "persistence_rmse": 0.003520976013434963,
+          "r2": -0.02155378186608825,
+          "rmse": 0.00355351911116838,
+          "rmse_improvement_over_persistence": -3.254309773341674e-05,
+          "smape": 165.73603306371743,
+          "zero_return_mae": 0.002427526894317559,
+          "zero_return_rmse": 0.003520976013434963
+        }
+      },
+      "model_file": "model_60m.joblib",
+      "scaler_file": "scaler_60m.joblib",
+      "split_counts": {
+        "test": 34848,
+        "train": 162986,
+        "validation": 34638
+      },
+      "split_ranges": {
+        "test": {
+          "maximum": "2026-08-14T20:58:00+00:00",
+          "minimum": "2026-07-08T23:36:00+00:00"
+        },
+        "train": {
+          "maximum": "2026-06-01T07:42:00+00:00",
+          "minimum": "2025-11-28T11:18:00+00:00"
+        },
+        "validation": {
+          "maximum": "2026-07-08T18:35:00+00:00",
+          "minimum": "2026-06-01T12:43:00+00:00"
+        }
+      }
+    }
+  },
+  "library_versions": {
+    "numpy": "1.26.4",
+    "pandas": "2.1.4",
+    "python": "3.12.6",
+    "scikit_learn": "1.4.2"
+  },
+  "model_version": "20260816T230329Z-linear_regression",
+  "split_policy": {
+    "purge_minutes": 240,
+    "test": 0.15,
+    "train": 0.7,
+    "validation": 0.15
+  },
+  "target_definition": "(close_at_exact_t_plus_h - close_at_t) / close_at_t",
+  "training_data": {
+    "gap_policy": "exact target and continuous 30-candle feature session",
+    "loaded_rows": 250000,
+    "maximum_time": "2026-08-14T21:58:00+00:00",
+    "minimum_time": "2025-11-28T10:49:00+00:00",
+    "provider": "histdata",
+    "symbol": "XAUUSD",
+    "timeframe": "1m"
+  }
+}

@@ -48,6 +48,9 @@ Options:
   --import-history  Run the configured ZIP-directory importer before startup.
   --train           Explicitly train the candle model before startup.
   --retrain         Explicitly retrain the candle model before startup.
+  reset             Run the guarded complete reset (`reset --dry-run` or `reset --yes`).
+  wash              Alias for the guarded reset (`wash --dry-run` or `wash --yes`).
+  verify            Verify clean database/artifact reset state without modifying it.
   --help             Show this help.
 
 Environment:
@@ -56,6 +59,17 @@ Environment:
 Normal startup never imports historical files or starts training explicitly.
 EOF
 }
+
+if [[ "${1:-}" == "reset" ]]; then
+  shift
+  exec "$PYTHON" "$SCRIPT_DIR/scripts/complete_reset.py" "$@"
+elif [[ "${1:-}" == "wash" ]]; then
+  shift
+  exec "$SCRIPT_DIR/scripts/wash_impacts.sh" "$@"
+elif [[ "${1:-}" == "verify" ]]; then
+  shift
+  exec "$PYTHON" "$SCRIPT_DIR/scripts/verify_reset.py" "$@"
+fi
 
 for argument in "$@"; do
   case "$argument" in

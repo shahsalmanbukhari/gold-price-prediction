@@ -297,6 +297,9 @@ def render_performance_analysis():
     ).reset_index()
     summary["directional_accuracy"] *= 100
     summary["mae_improvement"] = summary.persistence_mae - summary.mae
+    summary["mae_improvement_pct"] = (
+        summary.mae_improvement / summary.persistence_mae.replace(0, float("nan")) * 100
+    )
     minimum = get_settings().ml.performance_minimum_samples
     eligible = summary[summary.samples >= minimum]
     if eligible.empty:

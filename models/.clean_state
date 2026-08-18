@@ -1,0 +1,26 @@
+{
+  "reset_time": "2026-08-17T02:56:15.182475+00:00",
+  "backup_dir": "/Users/developer/PycharmProjects/GoldPricePredicton/backups/models/20260817T025615Z",
+  "archived": [
+    "candidates",
+    "linear_regression_features_realtime.pkl",
+    "linear_regression_model.pkl",
+    "linear_regression_model_realtime.pkl",
+    "linear_regression_pkr_model.pkl",
+    "linear_regression_scaler_realtime.pkl",
+    "linear_regression_usd_model.pkl",
+    "production",
+    "random_forest_features_realtime.pkl",
+    "random_forest_model.pkl",
+    "random_forest_model_realtime.pkl",
+    "random_forest_pkr_model.pkl",
+    "random_forest_scaler_realtime.pkl",
+    "random_forest_usd_model.pkl",
+    "scaler.pkl",
+    "versions",
+    "xgboost_model.pkl",
+    "xgboost_pkr_model.pkl",
+    "xgboost_usd_model.pkl"
+  ],
+  "feature_schema_required": "candle_features_v2"
+}
