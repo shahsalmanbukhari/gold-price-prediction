@@ -53,10 +53,10 @@ logs/**
 *.backup
 
 # Generated model artifacts and candidate bundles
-models/candidates/
-models/production/
-models/versions/
-models/quarantine/
+#models/candidates/
+#models/production/
+#models/versions/
+#models/quarantine/
 models/**/*.pkl
 models/**/*.joblib
 models/**/*.h5
@@ -66,9 +66,9 @@ models/**/*.pt
 models/**/*.pth
 
 # Historical datasets and generated analysis artifacts
-historical-data/
-data/historical/
-data/imports/
+#historical-data/
+#data/historical/
+#data/imports/
 artifacts/ui-audit/
 artifacts/screenshots/
 
